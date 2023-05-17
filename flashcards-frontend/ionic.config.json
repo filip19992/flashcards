@@ -1,0 +1,7 @@
+{
+  "name": "flashcards-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
