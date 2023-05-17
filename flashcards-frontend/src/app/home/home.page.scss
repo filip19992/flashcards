@@ -25,3 +25,38 @@
 #container a {
   text-decoration: none;
 }
+
+.fade-in {
+  animation: fadeInAnimation 1s ease-in;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card-header, .card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

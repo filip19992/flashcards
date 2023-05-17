@@ -13,6 +13,7 @@ interface Flashcard {
 })
 export class HomePage {
   flashcardData!: Flashcard;
+  showAnswer: boolean = false;
 
   constructor(private http: HttpClient) {}
 

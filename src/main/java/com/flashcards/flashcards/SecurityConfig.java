@@ -42,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll() // Allow access to the login endpoint
+                .antMatchers("/flashcard-random").permitAll() // Allow access to the login endpoint
                 .anyRequest().authenticated() // Specify the URL after successful logout
                 .and()
                 .csrf().disable();
