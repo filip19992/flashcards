@@ -11,7 +11,7 @@ public class CorsConfiguration implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:8100") // Update with your Ionic frontend URL
-                .allowedMethods("GET")
+                .allowedMethods("GET", "POST")
                 .allowCredentials(true);
     }
 }
