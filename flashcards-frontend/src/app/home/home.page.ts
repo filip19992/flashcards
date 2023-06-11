@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface Flashcard {
   question: string;
@@ -14,6 +14,7 @@ interface Flashcard {
 export class HomePage {
   flashcardData!: Flashcard;
   showAnswer: boolean = false;
+  authToken: string | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -23,8 +24,24 @@ export class HomePage {
 
   getFlashcardData() {
     const url = 'http://localhost:8080/flashcard-random';
-    this.http.get<Flashcard>(url).subscribe((data) => {
-      this.flashcardData = data;
-    });
+
+    this.authToken = localStorage.getItem('authToken');
+
+    if (this.authToken) {
+      const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.authToken);
+
+      this.http.get<Flashcard>(url, { headers }).subscribe(
+        (data) => {
+          this.flashcardData = data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      console.log('Token not found');
+      return;
+    }
   }
+
 }
