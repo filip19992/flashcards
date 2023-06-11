@@ -17,27 +17,6 @@ public class JwtTokenUtil {
     @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${jwt.expiration}")
-    private Long expiration;
-
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
-    }
-
-    private String createToken(Map<String, Object> claims, String subject) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + expiration * 1000);
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, secret)
-                .compact();
-    }
-
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

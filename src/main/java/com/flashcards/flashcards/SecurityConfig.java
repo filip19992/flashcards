@@ -23,7 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // Configure authentication provider(s)
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -44,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll() // Allow access to the login endpoint
-                .antMatchers("/flashcard-random").authenticated() // Allow access to the flashcard-random endpoint for authenticated users
-                .anyRequest().authenticated() // Specify the URL after successful logout
+                .antMatchers("/login").permitAll()
+                .antMatchers("/flashcard-random").authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

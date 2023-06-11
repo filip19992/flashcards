@@ -8,7 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -43,7 +42,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtil.extractUsername(jwtToken);
             } catch (ExpiredJwtException | SignatureException | MalformedJwtException e) {
-                // Handle token exceptions if necessary
+                System.out.println(e);
             }
         }
 
@@ -51,12 +50,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-                Authentication authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                authenticate(userDetails);
             }
         }
-
         chain.doFilter(request, response);
+    }
+
+    private static void authenticate(UserDetails userDetails) {
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails, null, userDetails.getAuthorities());
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
