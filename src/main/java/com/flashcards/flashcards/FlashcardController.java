@@ -9,11 +9,15 @@ import java.util.List;
 
 @RestController
 public class FlashcardController {
+    private final FlashCardRepository flashCardRepository;
+
+    public FlashcardController(FlashCardRepository flashCardRepository) {
+        this.flashCardRepository = flashCardRepository;
+    }
 
     @GetMapping("/flashcard-random")
     public ResponseEntity<List<Flashcard>> getRandomFlashcard() {
-        return new ResponseEntity<>(List.of(new Flashcard("house", "dom"),
-                                            new Flashcard("dog", "pies"))
-                , HttpStatus.OK);
+        List<Flashcard> flashCards = flashCardRepository.findAll();
+        return new ResponseEntity<>(flashCards, HttpStatus.OK);
     }
 }
