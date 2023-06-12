@@ -12,7 +12,7 @@ interface Flashcard {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  flashcardData!: Flashcard;
+  flashcardData: Flashcard[] = [];
   showAnswer: boolean = false;
   authToken: string | null = null;
 
@@ -30,7 +30,7 @@ export class HomePage {
     if (this.authToken) {
       const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.authToken);
 
-      this.http.get<Flashcard>(url, { headers }).subscribe(
+      this.http.get<Flashcard[]>(url, { headers }).subscribe(
         (data) => {
           this.flashcardData = data;
         },
@@ -43,5 +43,4 @@ export class HomePage {
       return;
     }
   }
-
 }

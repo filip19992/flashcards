@@ -7,9 +7,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="flashcardData" class="card-container">
+  <ion-card *ngFor="let flashcard of flashcardData" class="card-container">
     <ion-card-header class="card-header">
-      <ion-card-title class="card-title">{{ flashcardData.question }}</ion-card-title>
+      <ion-card-title class="card-title">{{ flashcard.question }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content class="card-content" *ngIf="!showAnswer">
@@ -17,7 +17,7 @@
     </ion-card-content>
 
     <ion-card-content class="card-content" *ngIf="showAnswer">
-      {{ flashcardData.answer }}
+      {{ flashcard.answer }}
     </ion-card-content>
   </ion-card>
 </ion-content>
