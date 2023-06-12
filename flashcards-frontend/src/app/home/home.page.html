@@ -7,16 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let flashcard of flashcardData" class="card-container">
-    <ion-card-header class="card-header">
-      <ion-card-title class="card-title">{{ flashcard.question }}</ion-card-title>
+  <ion-card *ngFor="let flashcard of flashcardData" (click)="onFlashcardClick(flashcard)">
+    <ion-card-header>
+      <ion-card-title>{{ flashcard.question }}</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content class="card-content" *ngIf="!showAnswer">
-      <ion-button expand="full" (click)="showAnswer = true">Show Answer</ion-button>
-    </ion-card-content>
-
-    <ion-card-content class="card-content" *ngIf="showAnswer">
+    <ion-card-content *ngIf="showAnswer && flashcard === selectedFlashcard">
       {{ flashcard.answer }}
     </ion-card-content>
   </ion-card>

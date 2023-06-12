@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 interface Flashcard {
   question: string;
@@ -13,6 +15,7 @@ interface Flashcard {
 })
 export class HomePage {
   flashcardData: Flashcard[] = [];
+  selectedFlashcard: Flashcard | null = null;
   showAnswer: boolean = false;
   authToken: string | null = null;
 
@@ -42,5 +45,9 @@ export class HomePage {
       console.log('Token not found');
       return;
     }
+  }
+  onFlashcardClick(flashcard: Flashcard) {
+    this.selectedFlashcard = flashcard;
+    this.showAnswer = true;
   }
 }
