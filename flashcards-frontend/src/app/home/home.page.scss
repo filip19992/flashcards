@@ -60,3 +60,24 @@
     opacity: 1;
   }
 }
+ion-card.show-answer {
+  background-color: green;
+}
+
+ion-card {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease-in-out;
+}
+
+ion-card:hover {
+  background-color: #ffffff;
+}
+
+ion-card-content {
+  transition: transform 0.3s ease-in-out;
+}
+
+ion-card:hover ion-card-content {
+  transform: scale(1.4);
+}

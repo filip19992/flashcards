@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let flashcard of flashcardData" (click)="onFlashcardClick(flashcard)">
+  <ion-card *ngFor="let flashcard of flashcardData" (click)="onFlashcardClick(flashcard)" [class.show-answer]="flashcard === selectedFlashcard && showAnswer" class="button-resize">
     <ion-card-header>
       <ion-card-title>{{ flashcard.question }}</ion-card-title>
     </ion-card-header>
